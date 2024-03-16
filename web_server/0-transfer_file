@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# script file to transfer a file from client or computer to web-server. - checking for command line arguments.
+
+if [ $# -lt 4 ]
+then
+	echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+	exit 1
+fi
+
+# assigning parameters to variables
+
+path_to_file=$1
+ip=$2
+username-$3
+path_to_ssh_key=$4
+
+
+# disabling strict host key checking
+
+scp -o "strictHostKeyChecking=no" -i "$path_to_ssh_key" "$path_to_file" "$username@$ip:~/"
+
+# checking if the file transfer was successful or not
+
+if [$? -eq 0]
+then
+	echo "FILE WAS TRANSFERRED SUCCESSFUL"
+else
+	echo "FILE TRANSFER FAILED"
+fi
